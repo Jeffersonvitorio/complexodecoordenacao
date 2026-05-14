@@ -4,7 +4,10 @@ let autoRotate = true;
 
 let backgroundIndex = 0;
 
-// Fundos
+// =========================
+// FUNDOS
+// =========================
+
 const backgrounds = [
 
   "#0b0f14",
@@ -16,20 +19,28 @@ const backgrounds = [
 ];
 
 // =========================
-// ESTILO ALTO FPS
+// ESTILO PRINCIPAL
 // =========================
 
-function applyPerformanceStyle() {
+function applyStyle() {
 
-  // Render mais leve
+  // IMPORTANTE:
+  // NÃO usar singleBonds:true
+
   viewer.setStyle({}, {
 
     stick: {
-      radius: 0.15
+
+      radius: 0.12,
+
+      smoothBond: false
+
     },
 
     sphere: {
+
       scale: 0.17
+
     }
 
   });
@@ -66,18 +77,18 @@ function applyPerformanceStyle() {
     }
   );
 
-  // Cobre
+  // COBRE
   viewer.addStyle(
     { elem: "Cu" },
 
     {
 
       sphere: {
-        scale: 0.38
+        scale: 0.40
       },
 
       stick: {
-        radius: 0.24
+        radius: 0.14
       },
 
       color: "#d89c59"
@@ -94,33 +105,43 @@ function applyPerformanceStyle() {
 
 async function loadMolecule() {
 
-  // Arquivo XYZ
+  // Carrega MOL
   const response =
-    await fetch("complexo.xyz");
+    await fetch(
+      "complexoatualizado.mol"
+    );
 
-  const xyz =
+  const mol =
     await response.text();
 
-  // Viewer otimizado
+  // Viewer
   viewer =
-    $3Dmol.createViewer("viewer", {
+    $3Dmol.createViewer(
+      "viewer",
+      {
 
-      backgroundColor: backgrounds[0],
+        backgroundColor:
+          backgrounds[0],
 
-      antialias: false
+        antialias: false
 
-    });
+      }
+    );
 
   // Outline melhora FPS
   viewer.setViewStyle({
     style: "outline"
   });
 
-  // Modelo
-  viewer.addModel(xyz, "xyz");
+  // IMPORTANTE:
+  // usa MOL e não XYZ
+  viewer.addModel(
+    mol,
+    "mol"
+  );
 
-  // Estilo
-  applyPerformanceStyle();
+  // Aplica estilos
+  applyStyle();
 
   // Centraliza
   viewer.zoomTo();
@@ -128,7 +149,7 @@ async function loadMolecule() {
   // Renderiza
   viewer.render();
 
-  // Rotação suave
+  // Auto rotação
   viewer.spin("y", 0.08);
 
   // Controles
@@ -146,46 +167,63 @@ function setupControls() {
     document.querySelector("canvas");
 
   // Mouse
-  canvas.addEventListener("mousemove", e => {
+  canvas.addEventListener(
+    "mousemove",
+    e => {
 
-    if (autoRotate && e.buttons === 1) {
-
-      e.stopImmediatePropagation();
-
-    }
-
-  }, true);
-
-  // Mouse down
-  canvas.addEventListener("mousedown", e => {
-
-    if (autoRotate) {
-
-      e.stopImmediatePropagation();
-
-    }
-
-  }, true);
-
-  // Touch
-  canvas.addEventListener("touchmove", e => {
-
-    if (autoRotate) {
-
-      if (e.touches.length === 1) {
+      if (
+        autoRotate &&
+        e.buttons === 1
+      ) {
 
         e.stopImmediatePropagation();
 
       }
 
-    }
+    },
+    true
+  );
 
-  }, true);
+  // Mouse down
+  canvas.addEventListener(
+    "mousedown",
+    e => {
+
+      if (autoRotate) {
+
+        e.stopImmediatePropagation();
+
+      }
+
+    },
+    true
+  );
+
+  // Touch
+  canvas.addEventListener(
+    "touchmove",
+    e => {
+
+      if (autoRotate) {
+
+        if (
+          e.touches.length === 1
+        ) {
+
+          e.stopImmediatePropagation();
+
+        }
+
+      }
+
+    },
+    true
+  );
 
 }
 
 // =========================
-// TOGGLE ROTAÇÃO
+// ROTAÇÃO
 // =========================
 
 function toggleRotation() {
@@ -194,11 +232,12 @@ function toggleRotation() {
 
   if (autoRotate) {
 
-    // Rotação mais leve
     viewer.spin("y", 0.08);
 
     document
-      .getElementById("rotateBtn")
+      .getElementById(
+        "rotateBtn"
+      )
       .innerText =
       "Rotação: Automática";
 
@@ -209,7 +248,9 @@ function toggleRotation() {
     viewer.spin(false);
 
     document
-      .getElementById("rotateBtn")
+      .getElementById(
+        "rotateBtn"
+      )
       .innerText =
       "Rotação: Manual";
 
@@ -224,9 +265,25 @@ function toggleRotation() {
 function toggleInfo() {
 
   const infoBox =
-    document.getElementById("infoBox");
+    document.getElementById(
+      "infoBox"
+    );
 
-  infoBox.classList.toggle("hidden");
+  infoBox.classList.toggle(
+    "hidden"
+  );
+
+}
+
+// =========================
+// OCULTAR UI
+// =========================
+
+function toggleUI() {
+
+  document.body.classList.toggle(
+    "ui-hidden"
+  );
 
 }
 
@@ -237,7 +294,9 @@ function toggleInfo() {
 function toggleFullscreen() {
 
   // Entrar
-  if (!document.fullscreenElement) {
+  if (
+    !document.fullscreenElement
+  ) {
 
     document.documentElement
       .requestFullscreen();
@@ -251,7 +310,7 @@ function toggleFullscreen() {
 
   }
 
-  // Re-render otimizado
+  // Ajuste render
   setTimeout(() => {
 
     viewer.resize();
@@ -270,14 +329,19 @@ function changeBackground() {
 
   backgroundIndex++;
 
-  if (backgroundIndex >= backgrounds.length) {
+  if (
+    backgroundIndex >=
+    backgrounds.length
+  ) {
 
     backgroundIndex = 0;
 
   }
 
   const currentBackground =
-    backgrounds[backgroundIndex];
+    backgrounds[
+      backgroundIndex
+    ];
 
   // Fundo viewer
   viewer.setBackgroundColor(
@@ -288,34 +352,49 @@ function changeBackground() {
 
   // Fundo claro
   const isLightBackground =
-    currentBackground === "#ffffff";
+    currentBackground ===
+    "#ffffff";
 
   // Elementos
   const title =
-    document.querySelector(".title");
+    document.querySelector(
+      ".title"
+    );
 
   const legend =
-    document.querySelector(".legend");
+    document.querySelector(
+      ".legend"
+    );
 
   const infoBox =
-    document.querySelector(".info-box");
+    document.querySelector(
+      ".info-box"
+    );
 
   const buttons =
-    document.querySelectorAll(".controls button");
+    document.querySelectorAll(
+      ".controls button"
+    );
 
   // Tema claro
   if (isLightBackground) {
 
-    title.style.color = "#111";
-    legend.style.color = "#111";
-    infoBox.style.color = "#111";
+    title.style.color =
+      "#111";
+
+    legend.style.color =
+      "#111";
+
+    infoBox.style.color =
+      "#111";
 
     infoBox.style.background =
       "rgba(255,255,255,0.85)";
 
     buttons.forEach(button => {
 
-      button.style.color = "#111";
+      button.style.color =
+        "#111";
 
       button.style.background =
         "rgba(0,0,0,0.06)";
@@ -330,16 +409,22 @@ function changeBackground() {
   // Tema escuro
   else {
 
-    title.style.color = "white";
-    legend.style.color = "white";
-    infoBox.style.color = "white";
+    title.style.color =
+      "white";
+
+    legend.style.color =
+      "white";
+
+    infoBox.style.color =
+      "white";
 
     infoBox.style.background =
       "rgba(255,255,255,0.08)";
 
     buttons.forEach(button => {
 
-      button.style.color = "white";
+      button.style.color =
+        "white";
 
       button.style.background =
         "rgba(255,255,255,0.08)";
