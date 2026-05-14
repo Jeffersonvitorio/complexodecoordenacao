@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0"/>
+
+  <title>Visualizador Molecular</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Título -->
+
+  <div class="title">
+    Complexo Molecular
+  </div>
+
+  <!-- Controles -->
+
+  <div class="controls">
+
+    <button id="rotateBtn"
+            onclick="toggleRotation()">
+
+      Rotação: Automática
+
+    </button>
+
+    <button onclick="changeBackground()">
+
+      Alterar Fundo
+
+    </button>
+
+    <button onclick="toggleInfo()">
+
+      Info
+
+    </button>
+
+    <button onclick="toggleFullscreen()">
+
+      Fullscreen
+
+    </button>
+
+  </div>
+
+  <!-- Caixa de informações -->
+
+  <div class="info-box hidden"
+       id="infoBox">
+
+    <div class="info-title">
+      Complexo Coordenado
+    </div>
+
+    <div class="info-text">
+
+      Estrutura molecular proposta formada por:
+
+      <br><br>
+
+      • 2 moléculas de vermelho de metila
+
+      <br>
+
+      • 1 salicilato
+
+      <br>
+
+      • 1 centro metálico Cu²⁺
+
+      <br><br>
+
+      O complexo foi modelado computacionalmente
+      para análise estrutural e plausibilidade
+      de coordenação molecular.
+
+    </div>
+
+  </div>
+
+  <!-- Viewer -->
+
+  <div id="viewer"></div>
+
+  <!-- Legenda -->
+
+  <div class="legend">
+
+    <div class="legend-title">
+      Elementos
+    </div>
+
+    <div class="legend-item">
+      <span class="color oxygen"></span>
+      Oxigênio (O)
+    </div>
+
+    <div class="legend-item">
+      <span class="color nitrogen"></span>
+      Nitrogênio (N)
+    </div>
+
+    <div class="legend-item">
+      <span class="color carbon"></span>
+      Carbono (C)
+    </div>
+
+    <div class="legend-item">
+      <span class="color hydrogen"></span>
+      Hidrogênio (H)
+    </div>
+
+    <div class="legend-item">
+      <span class="color copper"></span>
+      Cobre (Cu)
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

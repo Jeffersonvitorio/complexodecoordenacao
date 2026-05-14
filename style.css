@@ -1,0 +1,280 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+
+  overflow: hidden;
+
+  font-family: Arial, sans-serif;
+
+  background:
+    radial-gradient(circle at top,
+    #182330,
+    #0b0f14);
+
+}
+
+/* Viewer */
+
+#viewer {
+
+  width: 100vw;
+  height: 100vh;
+
+}
+
+/* Título */
+
+.title {
+
+  position: absolute;
+
+  top: 20px;
+  left: 20px;
+
+  z-index: 30;
+
+  color: white;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  padding: 16px 22px;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.08);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 0 30px rgba(0,0,0,0.25);
+
+}
+
+/* Controles */
+
+.controls {
+
+  position: absolute;
+
+  top: 100px;
+  left: 20px;
+
+  display: flex;
+  gap: 12px;
+
+  z-index: 30;
+
+}
+
+.controls button {
+
+  padding: 12px 18px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.08);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(10px);
+
+  color: white;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+
+}
+
+.controls button:hover {
+
+  background:
+    rgba(255,255,255,0.16);
+
+  transform: scale(1.04);
+
+}
+
+/* Caixa info */
+
+.info-box {
+
+  position: absolute;
+
+  left: 20px;
+  top: 170px;
+
+  width: 340px;
+
+  z-index: 30;
+
+  padding: 22px;
+
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.08);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 0 35px rgba(0,0,0,0.25);
+
+  color: white;
+
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+
+}
+
+/* Oculta */
+
+.hidden {
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform:
+    translateY(-10px);
+
+}
+
+/* Exibe */
+
+.info-box:not(.hidden) {
+
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+}
+
+/* Título info */
+
+.info-title {
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  margin-bottom: 16px;
+
+}
+
+/* Texto info */
+
+.info-text {
+
+  line-height: 1.7;
+
+  font-size: 15px;
+
+  color: inherit;
+
+}
+
+/* Legenda */
+
+.legend {
+
+  position: absolute;
+
+  bottom: 20px;
+  left: 20px;
+
+  z-index: 30;
+
+  width: 240px;
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.08);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(12px);
+
+  color: white;
+
+  box-shadow:
+    0 0 30px rgba(0,0,0,0.25);
+
+}
+
+.legend-title {
+
+  font-size: 18px;
+  font-weight: 700;
+
+  margin-bottom: 14px;
+
+}
+
+.legend-item {
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+
+  font-size: 14px;
+
+}
+
+/* Bolinhas */
+
+.color {
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.2);
+
+}
+
+/* Cores */
+
+.oxygen {
+  background: #ff3b3b;
+}
+
+.nitrogen {
+  background: #3b82ff;
+}
+
+.carbon {
+  background: #777777;
+}
+
+.hydrogen {
+  background: #f5f5f5;
+}
+
+.copper {
+  background: #d89c59;
+}
