@@ -1,8 +1,16 @@
+/* =========================
+   RESET
+========================= */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/* =========================
+   BODY
+========================= */
 
 body {
 
@@ -17,7 +25,9 @@ body {
 
 }
 
-/* Viewer */
+/* =========================
+   VIEWER
+========================= */
 
 #viewer {
 
@@ -26,7 +36,9 @@ body {
 
 }
 
-/* Título */
+/* =========================
+   TÍTULO
+========================= */
 
 .title {
 
@@ -56,9 +68,15 @@ body {
   box-shadow:
     0 0 30px rgba(0,0,0,0.25);
 
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+
 }
 
-/* Controles */
+/* =========================
+   CONTROLES
+========================= */
 
 .controls {
 
@@ -70,7 +88,13 @@ body {
   display: flex;
   gap: 12px;
 
+  flex-wrap: wrap;
+
   z-index: 30;
+
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
 
 }
 
@@ -108,14 +132,16 @@ body {
 
 }
 
-/* Caixa info */
+/* =========================
+   INFO BOX
+========================= */
 
 .info-box {
 
   position: absolute;
 
   left: 20px;
-  top: 170px;
+  top: 190px;
 
   width: 340px;
 
@@ -143,7 +169,7 @@ body {
 
 }
 
-/* Oculta */
+/* Oculta info */
 
 .hidden {
 
@@ -153,17 +179,6 @@ body {
 
   transform:
     translateY(-10px);
-
-}
-
-/* Exibe */
-
-.info-box:not(.hidden) {
-
-  opacity: 1;
-
-  transform:
-    translateY(0);
 
 }
 
@@ -191,14 +206,16 @@ body {
 
 }
 
-/* Legenda */
+/* =========================
+   LEGENDA
+========================= */
 
 .legend {
 
   position: absolute;
 
   bottom: 20px;
-  left: 20px;
+  right: 20px;
 
   z-index: 30;
 
@@ -220,7 +237,13 @@ body {
   box-shadow:
     0 0 30px rgba(0,0,0,0.25);
 
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+
 }
+
+/* Título legenda */
 
 .legend-title {
 
@@ -230,6 +253,8 @@ body {
   margin-bottom: 14px;
 
 }
+
+/* Item legenda */
 
 .legend-item {
 
@@ -257,7 +282,9 @@ body {
 
 }
 
-/* Cores */
+/* =========================
+   CORES DOS ELEMENTOS
+========================= */
 
 .oxygen {
   background: #ff3b3b;
@@ -278,26 +305,30 @@ body {
 .copper {
   background: #d89c59;
 }
+
+/* =========================
+   OCULTAR UI
+========================= */
+
+.ui-hidden .title,
+.ui-hidden .controls,
+.ui-hidden .legend,
+.ui-hidden .info-box {
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform:
+    translateY(-10px);
+
+}
+
 /* =========================
    MOBILE RESPONSIVO
 ========================= */
 
 @media (max-width: 768px) {
-
-  /* Remove overflow lateral */
-  body {
-
-    overflow: hidden;
-
-  }
-
-  /* Viewer ocupa tela inteira */
-  #viewer {
-
-    width: 100vw;
-    height: 100vh;
-
-  }
 
   /* Título */
 
@@ -320,11 +351,9 @@ body {
 
   .controls {
 
-    top: 72px;
+    top: 70px;
     left: 12px;
     right: 12px;
-
-    flex-wrap: wrap;
 
     gap: 8px;
 
@@ -332,30 +361,28 @@ body {
 
   .controls button {
 
+    flex: 1;
+
+    min-width: 120px;
+
     font-size: 13px;
 
     padding: 10px 14px;
 
     border-radius: 12px;
 
-    flex: 1;
-
-    min-width: 120px;
-
   }
 
-  /* Caixa info */
+  /* Info */
 
   .info-box {
 
     left: 12px;
     right: 12px;
 
-    top: 140px;
+    top: 150px;
 
     width: auto;
-
-    max-width: unset;
 
     padding: 18px;
 
@@ -383,13 +410,14 @@ body {
 
     left: 12px;
     right: 12px;
+
     bottom: 12px;
 
     width: auto;
 
-    padding: 14px;
+    padding: 12px;
 
-    border-radius: 16px;
+    border-radius: 14px;
 
   }
 
